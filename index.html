@@ -37,7 +37,7 @@
       ta.select();
       try {
         document.execCommand('copy');
-        showMsg('복사되었습니다!');
+        showMsg('복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다.');
       } catch(e){
         showMsg('복사 실패 — 번호를 길게 눌러 복사하세요.');
       }
@@ -49,7 +49,7 @@
       if(!text){ showMsg('복사할 텍스트가 없습니다.'); return; }
       if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(text)
-          .then(()=> showMsg('복사되었습니다!'))
+          .then(()=> showMsg('복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다.'))
           .catch(()=> fallbackCopy(text));
       } else {
         fallbackCopy(text);
