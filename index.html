@@ -8,11 +8,20 @@
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;background:#f6f7fb;color:#111}
     .card{max-width:420px;margin:12vh auto;padding:20px;border-radius:12px;background:#fff;box-shadow:0 8px 30px rgba(20,20,50,0.06);text-align:center}
     h1{font-size:1.2rem;margin:0 0 12px}
-    #account{display:inline-block;padding:8px 12px;border-radius:8px;background:#f2f4f8;font-weight:700;letter-spacing:2px}
+    #account{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:8px;
+      background:#f2f4f8;
+      font-weight:700;
+      letter-spacing:2px;
+      color: #111;           /* 파란색 제거 */
+      text-decoration: none; /* 밑줄 제거 */
+    }
     .info{margin-top:10px;font-size:0.95rem;color:#333}
     button{margin-top:16px;padding:12px 18px;border-radius:10px;border:0;font-weight:600;cursor:pointer;background:#4a6cf7;color:#fff}
     button:hover{background:#3957d7}
-    #msg{margin-top:12px;font-size:0.95rem;color:#444}
+    #msg{margin-top:12px;font-size:0.95rem;color:#444;white-space:pre-line;}
   </style>
 </head>
 <body>
@@ -37,7 +46,7 @@
       ta.select();
       try {
         document.execCommand('copy');
-        showMsg('복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다.');
+        showMsg("복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다.");
       } catch(e){
         showMsg('복사 실패 — 번호를 길게 눌러 복사하세요.');
       }
@@ -49,7 +58,7 @@
       if(!text){ showMsg('복사할 텍스트가 없습니다.'); return; }
       if(navigator.clipboard && navigator.clipboard.writeText){
         navigator.clipboard.writeText(text)
-          .then(()=> showMsg('복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다.'))
+          .then(()=> showMsg("복사되었습니다.\n감사한 마음 잊지 않고 행복하게 잘 살겠습니다."))
           .catch(()=> fallbackCopy(text));
       } else {
         fallbackCopy(text);
