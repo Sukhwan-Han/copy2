@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>계좌번호 복사</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif;background:#f6f7fb;color:#111}
+    .card{max-width:420px;margin:12vh auto;padding:20px;border-radius:12px;background:#fff;box-shadow:0 8px 30px rgba(20,20,50,0.06);text-align:center}
+    h1{font-size:1.2rem;margin:0 0 12px}
+    #account{display:inline-block;padding:8px 12px;border-radius:8px;background:#f2f4f8;font-weight:700;letter-spacing:2px}
+    .info{margin-top:10px;font-size:0.95rem;color:#333}
+    button{margin-top:16px;padding:12px 18px;border-radius:10px;border:0;font-weight:600;cursor:pointer;background:#4a6cf7;color:#fff}
+    button:hover{background:#3957d7}
+    #msg{margin-top:12px;font-size:0.95rem;color:#444}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>계좌번호 복사</h1>
+    <div>계좌번호: <span id="account">110427331734</span></div>
+    <div class="info">은행: 신한은행</div>
+    <div class="info">입금주: 남하늘</div>
+    <button id="copyBtn">복사하기</button>
+    <div id="msg">버튼을 눌러 계좌번호를 복사하세요.</div>
+  </div>
+
+  <script>
+    const msgEl = document.getElementById('msg');
+
+    function showMsg(text){ msgEl.textContent = text; }
+
+    function fallbackCopy(text){
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showMsg('복사되었습니다!');
+      } catch(e){
+        showMsg('복사 실패 — 번호를 길게 눌러 복사하세요.');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function copyText(){
+      const text = document.getElementById('account').innerText.trim();
+      if(!text){ showMsg('복사할 텍스트가 없습니다.'); return; }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text)
+          .then(()=> showMsg('복사되었습니다!'))
+          .catch(()=> fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    document.getElementById('copyBtn').addEventListener('click', copyText);
+  </script>
+</body>
+</html>
